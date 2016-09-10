@@ -11,7 +11,8 @@ var assets = {
     'node_modules/bootstrap/dist/fonts/*',
   ],
   css: [
-    'node_modules/bootstrap/dist/css/bootstrap.css'
+    'node_modules/bootstrap/dist/css/bootstrap.css',
+    'assets/css/library_sparks.css'
   ],
   js: [
     'node_modules/jquery/dist/jquery.js',
