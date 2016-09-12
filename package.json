@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "serve": "gulp && python manage.py runserver",
+    "serve": "gulp && python manage.py runserver 0.0.0.0:8000",
     "migrate": "python manage.py migrate"
   },
   "author": "Fernanda Vieira <github.com/fernandasj>",
