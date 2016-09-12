@@ -2,6 +2,7 @@ var gulp = require('gulp'),
   cleanCSS = require('gulp-clean-css'),
   concat = require('gulp-concat'),
   plumber = require('gulp-plumber'),
+  runSequence = require('run-sequence'),
   uglify = require('gulp-uglify');
 
 
@@ -44,4 +45,6 @@ gulp.task('js', function() {
     .pipe(gulp.dest('static/js'));
 });
 
-gulp.task('default', ['copy', 'css', 'js']);
+gulp.task('default', function(callback) {
+  runSequence('copy', 'css', 'js', callback);
+});
