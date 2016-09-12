@@ -14,6 +14,17 @@ from django.contrib.auth.models import User
 
 
 class Book(models.Model):
+    disponivel = 'disponivel'
+    emprestado = 'emprestado'
+    reservado = 'reservado'
+    consulta = 'consulta local'
+    STATUS_CHOICES = (
+        (disponivel, 'disponivel'),
+        (emprestado, 'emprestado'),
+        (reservado, 'reservado'),
+        (consulta, 'consulta local'),
+    )
+
     title = models.CharField(
         'Título',
         max_length=150
@@ -36,6 +47,7 @@ class Book(models.Model):
 
     status = models.CharField(
         'Status',
+        choices=STATUS_CHOICES,
         max_length=65,
         default='disponivel'
     )
@@ -78,7 +90,7 @@ class Lending(models.Model):
     )
 
     def __str__(self):
-        return self.book
+        return self.book.title
 
     class Meta:
         verbose_name = 'Emprestimo'
@@ -109,7 +121,7 @@ class Reserve(models.Model):
     )
 
     def __str__(self):
-        return self.book
+        return self.book.title
 
     class Meta:
         verbose_name = 'Reserva'
