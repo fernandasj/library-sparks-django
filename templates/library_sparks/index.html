@@ -6,4 +6,11 @@
 
 {% block content %}
 <h1>Hello, {% user_display user %}!</h1>
+
+{% for book in books %}
+
+    <h2> Livros: </h2>
+    <h3>{{ book.title }}</h3>
+
+{% endfor %}
 {% endblock %}
