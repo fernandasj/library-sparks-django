@@ -141,3 +141,6 @@ db.sqlite3
 
 # Generated Static Files
 static/
+
+# Generated Migrations
+migrations/
