@@ -12,6 +12,7 @@ var assets = {
   ],
   css: [
     'node_modules/bootswatch/flatly/bootstrap.css',
+    // 'node_modules/bootstrap/dist/css/bootstrap.css',
     'assets/css/library_sparks.css'
   ],
   js: [
