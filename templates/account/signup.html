@@ -1,0 +1,30 @@
+{% extends "account/base.html" %}
+
+{% block title %}Inscrever-se{% endblock %}
+
+{% block content %}
+  <form class="form-account" id="signup_form" method="post" action="{% url 'account_signup' %}">
+    {% csrf_token %}
+
+    <label for="id_username" class="sr-only">Nome de Usuário</label>
+    <input id="id_username" type="text" class="form-control" name="username" placeholder="Nome de Usuário" required autofocus>
+
+    <label for="id_email" class="sr-only">E-mail (opcional)</label>
+    <input id="id_email" type="email" class="form-control" name="email" placeholder="Endereço de e-mail (opcional)">
+
+    <label for="id_password1" class="sr-only">Senha</label>
+    <input id="id_password1" type="password" name="password1" class="form-control" placeholder="Senha" required>
+
+    <label for="id_password2" class="sr-only">Confirmar senha</label>
+    <input id="id_password2" type="password" name="password2" class="form-control" placeholder="Confirmar senha" required>
+
+    {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <button class="btn btn-success btn-block" type="submit">INSCREVER-SE</button>
+
+    <div class="form-account-info">
+      <p>Já tem uma conta? <a href="{{ login_url }}">Entrar</a></p>
+    </div>
+  </form>
+{% endblock %}

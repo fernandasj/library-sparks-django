@@ -1,0 +1,32 @@
+{% extends "account/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+  <form class="form-account" method="POST" action="{% url 'account_login' %}">
+    {% csrf_token %}
+
+    <label for="id_login" class="sr-only">Nome de Usuário</label>
+    <input id="id_login" type="text" class="form-control" name="login" placeholder="Nome de Usuário" required autofocus>
+
+    <label for="id_password" class="sr-only">Senha</label>
+    <input id="id_password" type="password" name="password" class="form-control" placeholder="Senha" required>
+
+    <div class="checkbox">
+      <label>
+        <input id="id_remember" type="checkbox" name="remember"> Lembrar de mim
+      </label>
+    </div>
+
+    {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+    {% endif %}
+
+    <button class="btn btn-success btn-block" type="submit">ENTRAR</button>
+
+    <div class="form-account-info">
+      <a href="{% url 'account_reset_password' %}">Esqueceu a sua senha?</a>
+      <p>Não tem uma conta? <a href="{{ signup_url }}">Inscrever-se</a></p>
+    </div>
+  </form>
+{% endblock %}

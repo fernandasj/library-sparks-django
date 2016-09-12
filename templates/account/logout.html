@@ -1,0 +1,16 @@
+{% extends "account/base.html" %}
+
+{% block title %}Logout{% endblock %}
+
+{% block content %}
+  <form class="form-account" method="post" action="{% url 'account_logout' %}">
+    {% csrf_token %}
+    <h1>Encerrar sessão</h1>
+    <p>Você tem certeza que deseja sair?</p>
+
+    {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+    {% endif %}
+    <button class="btn btn-success btn-block" type="submit">Sair</button>
+  </form>
+{% endblock %}

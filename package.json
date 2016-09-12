@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "serve": "gulp && python manage.py runserver"
+    "serve": "gulp && python manage.py runserver",
+    "migrate": "python manage.py migrate"
   },
   "author": "Fernanda Vieira <github.com/fernandasj>",
   "homepage": "https://github.com/fernandasj/library_sparks#readme",
@@ -14,6 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "bootswatch": "^3.3.7",
     "jquery": "^3.1.0"
   },
   "devDependencies": {

@@ -1,4 +1,58 @@
 body {
-  min-height: 2000px;
-  padding-top: 70px;
+  padding-top: 7rem;
+}
+
+.form-account {
+  max-width: 50rem;
+  padding: 1.5rem;
+  margin-top: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-account .checkbox {
+  margin-bottom: 1rem;
+}
+
+.form-account .checkbox {
+  font-weight: normal;
+}
+
+.form-account .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 1rem;
+  font-size: 1.6rem;
+}
+
+.form-account .form-control:focus {
+  z-index: 2;
+}
+
+.form-account input[type="text"] {
+  margin-bottom: 1rem;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-account input[type="email"] {
+  margin-bottom: 1rem;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-account input[type="password"] {
+  margin-bottom: 1rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-account .form-account-info {
+  padding: 1rem;
+  margin: 1rem;
+  text-align: center;
+  font-size: 1.4rem;
 }
