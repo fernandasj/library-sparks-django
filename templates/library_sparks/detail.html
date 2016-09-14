@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load account %}
+
+{% block title %}Livro{% endblock %}
+
+{% block content %}
+<h1> Sobre: </h1>
+
+    <p>{{ book.title }}</p>
+    <p>{{ book.ediction }}</p>
+    <p>{{ book.edictor }}</p>
+    <p>{{ book.date_ediction }}</p>
+    <p>{{ book.status }}</p>
+
+{% endblock %}

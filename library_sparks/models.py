@@ -14,15 +14,15 @@ from django.contrib.auth.models import User
 
 
 class Book(models.Model):
-    disponivel = 'disponivel'
-    emprestado = 'emprestado'
-    reservado = 'reservado'
-    consulta = 'consulta local'
+    DISPONIVEL = 'DISPONIVEL'
+    EMPRESTADO = 'EMPRESTADO'
+    RESERVADO = 'RESERVADO'
+    CONSULTA_LOCAL = 'CONSULTA_LOCAL'
     STATUS_CHOICES = (
-        (disponivel, 'disponivel'),
-        (emprestado, 'emprestado'),
-        (reservado, 'reservado'),
-        (consulta, 'consulta local'),
+        (DISPONIVEL, 'Disponivel'),
+        (EMPRESTADO, 'Emprestado'),
+        (RESERVADO, 'Reservado'),
+        (CONSULTA_LOCAL, 'Consulta Local'),
     )
 
     title = models.CharField(
@@ -49,7 +49,7 @@ class Book(models.Model):
         'Status',
         choices=STATUS_CHOICES,
         max_length=65,
-        default='disponivel'
+        default=DISPONIVEL
     )
 
     def __str__(self):
@@ -86,7 +86,9 @@ class Lending(models.Model):
     date_devolution = models.DateField(
         'Data de devolução',
         default=timezone.now(),
-        blank=True
+        null=True,
+        blank=True,
+
     )
 
     def __str__(self):

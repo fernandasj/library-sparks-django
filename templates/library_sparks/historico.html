@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load account %}
+
+{% block title %}Historico{% endblock %}
+
+{% block content %}
+
+<h1>Empréstimos: </h1>
+{% for lending in user.lendings.all %}
+    <a href="{% url 'book_detail' lending.book.pk %}"><h2>{{ lending.book.title }}</h2></a>
+
+{% endfor %}
+
+<h1>Reserva: </h1>
+{% for reserve in user.reserves.all %}
+    <a href="{% url 'book_detail' reserve.book.pk %}"><h2>{{ reserve.book.title }}</h2></a><a href="{% url 'reserva_cancelar' reserve.pk %}"><button type="button">Cancelar</button></a>
+{% endfor %}
+{% endblock %}

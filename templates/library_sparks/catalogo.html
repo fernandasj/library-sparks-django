@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load account %}
+
+{% block title %}Catalogo{% endblock %}
+
+{% block content %}
+{% for book in books %}
+
+<h2> Catalogo: </h2>
+<table border="2">
+    <tr>
+        <td>Titulo:</td>
+        <td>Status:</td>
+    </tr>
+    <tr>
+        <td> {{ book.title }} </td>
+        <td> {{ book.status }} </td>
+    </tr>
+
+</table>
+{% endfor %}
+{% endblock %}
