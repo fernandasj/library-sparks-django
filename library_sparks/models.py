@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
+
 from __future__ import unicode_literals
 
-from django.db import models
-
-from django.utils import timezone
-
 from django.contrib.auth.models import User
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 # ==============================
@@ -19,7 +19,7 @@ class Book(models.Model):
     RESERVADO = 'RESERVADO'
     CONSULTA_LOCAL = 'CONSULTA_LOCAL'
     STATUS_CHOICES = (
-        (DISPONIVEL, 'Disponivel'),
+        (DISPONIVEL, 'Disponível'),
         (EMPRESTADO, 'Emprestado'),
         (RESERVADO, 'Reservado'),
         (CONSULTA_LOCAL, 'Consulta Local'),
@@ -41,8 +41,7 @@ class Book(models.Model):
     )
 
     date_ediction = models.DateField(
-        'Data de Edição',
-        default=timezone.now()
+        'Data de Edição'
     )
 
     status = models.CharField(
@@ -59,13 +58,13 @@ class Book(models.Model):
         verbose_name = 'Livro'
         verbose_name_plural = 'Livros'
 
+
 # ============================
 # Lending
 # ============================
 
 
 class Lending(models.Model):
-
     user = models.ForeignKey(
         User,
         verbose_name='usuario',
@@ -80,15 +79,14 @@ class Lending(models.Model):
 
     date_lending = models.DateField(
         'Data do empréstimo',
-        default=timezone.now()
+        auto_now_add=True,
     )
 
     date_devolution = models.DateField(
         'Data de devolução',
-        default=timezone.now(),
+        default=None,
         null=True,
         blank=True,
-
     )
 
     def __str__(self):
@@ -97,6 +95,26 @@ class Lending(models.Model):
     class Meta:
         verbose_name = 'Emprestimo'
         verbose_name_plural = 'Emprestimos'
+
+
+@receiver(post_save, sender=Lending)
+def update_book_status(sender, instance=None, created=False, **kwargs):
+    book = instance.book
+    if not instance.date_devolution:
+        book.status = Book.EMPRESTADO
+    else:
+        book.status = Book.DISPONIVEL
+    book.save()
+
+
+@receiver(post_save, sender=Lending)
+def remove_previous_reserve(sender, instance=None, created=False, **kwargs):
+    if created:
+        try:
+            reserve = Reserve.objects.get(book=instance.book)
+            reserve.delete()
+        except models.Model.DoesNotExists:
+            pass
 
 
 # =========================
@@ -119,7 +137,7 @@ class Reserve(models.Model):
 
     date_reserve = models.DateField(
         'Data da Reserva',
-        default=timezone.now(),
+        auto_now_add=True,
     )
 
     def __str__(self):

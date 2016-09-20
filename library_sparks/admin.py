@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
+
 from django.contrib import admin
 
 from .models import Book, Lending, Reserve
+
 
 # ====================
 # BookAdmin
@@ -8,9 +11,10 @@ from .models import Book, Lending, Reserve
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('title',)
+    list_display = ('id', 'title', 'edictor', 'ediction', 'date_ediction', 'status')
 
 admin.site.register(Book, BookAdmin)
+
 
 # ====================
 # LendingAdmin
@@ -18,9 +22,11 @@ admin.site.register(Book, BookAdmin)
 
 
 class LendingAdmin(admin.ModelAdmin):
-    list_display = ('book',)
+    list_display = ('id', 'user', 'book', 'date_lending', 'date_devolution')
+    ordering = ('date_devolution', 'date_lending')
 
 admin.site.register(Lending, LendingAdmin)
+
 
 # ====================
 # LendingAdmin
@@ -28,7 +34,7 @@ admin.site.register(Lending, LendingAdmin)
 
 
 class ReserveAdmin(admin.ModelAdmin):
-    list_display = ('book',)
+    list_display = ('id', 'user', 'book', 'date_reserve')
+    ordering = ('date_reserve',)
 
 admin.site.register(Reserve, ReserveAdmin)
-
