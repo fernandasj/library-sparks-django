@@ -6,6 +6,37 @@
   <form class="form-account" id="signup_form" method="post" action="{% url 'account_signup' %}">
     {% csrf_token %}
 
+    {% if form.errors %}
+        {% for error in form.errors %}
+            {% if error == 'username' %}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p>Desculpe, esse nome de usuário não está disponível.</p>
+              </div>
+            {% elif error == 'password1' %}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <p>Sua senha é muito curta.</p>
+            </div>
+            {% elif error == 'password2' %}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <p>As senhas são diferentes.</p>
+            </div>
+            {% elif error == 'email' %}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <p>Desculpe, esse e-mail já foi usado.</p>
+            </div>
+            {% else %}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <p>Ooops, ocorreu um erro! Tente novamente.</p>
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
     <label for="id_username" class="sr-only">Nome de Usuário</label>
     <input id="id_username" type="text" class="form-control" name="username" placeholder="Nome de Usuário" required autofocus>
 

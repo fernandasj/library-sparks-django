@@ -2,6 +2,17 @@ body {
   padding-top: 7rem;
 }
 
+.navbar .navbar-toggle {
+  color: #FFFFFF;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+
+.navbar .navbar-toggle:hover {
+  color: #18BC9C;
+}
+
+
 .form-account {
   max-width: 50rem;
   padding: 1.5rem;
