@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Meus Empréstimos</h3>
+  </div>
+  <div class="panel-body">
+    {% if lendings %}
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>LIVRO</th>
+              <th>DATA DE EMPRÉSTIMO</th>
+              <th>DATA DE DEVOLUÇÃO</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for lending in lendings %}
+              <tr>
+                <td>{{ lending.book.title }}</td>
+                <td>{{ lending.date_lending }}</td>
+                <td>{{ lending.date_devolution }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Minhas Reservas</h3>
+  </div>
+  <div class="panel-body">
+    {% if reserves %}
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>LIVRO</th>
+              <th>DATA DE RESERVA</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for reserve in reserves %}
+              <tr>
+                <td>{{ reserve.book.title }}</td>
+                <td>{{ reserve.date_reserve }}</td>
+                <td><a class="btn btn-danger btn-sm" href="{% url 'reserva_cancelar' reserve.pk %}">Cancelar Reserva</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

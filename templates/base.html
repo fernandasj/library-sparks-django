@@ -28,13 +28,14 @@
               <span class="sr-only">Toggle navigation</span>
               <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
             </button>
-            <a class="navbar-brand" href="#">Library Sparks</a>
+            <a class="navbar-brand" href="{% url 'index' %}">Library Sparks</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="#">Home</a></li>
+              <li><a href="{% url 'home' %}">Home</a></li>
               <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="{% url 'catalogo' %}">Catálogo</a></li>
+              <li><a href="{% url 'account_logout' %}">Sair</a></li>
             </ul>
           </div>
         </div>

@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -98,7 +99,7 @@ class Lending(models.Model):
 
 
 @receiver(post_save, sender=Lending)
-def update_book_status(sender, instance=None, created=False, **kwargs):
+def lending_book_status(sender, instance=None, created=False, **kwargs):
     book = instance.book
     if not instance.date_devolution:
         book.status = Book.EMPRESTADO
@@ -113,7 +114,7 @@ def remove_previous_reserve(sender, instance=None, created=False, **kwargs):
         try:
             reserve = Reserve.objects.get(book=instance.book)
             reserve.delete()
-        except models.Model.DoesNotExists:
+        except ObjectDoesNotExist:
             pass
 
 
@@ -146,3 +147,12 @@ class Reserve(models.Model):
     class Meta:
         verbose_name = 'Reserva'
         verbose_name_plural = 'Reservas'
+
+
+@receiver(post_save, sender=Reserve)
+def reserve_book_status(sender, instance=None, created=False, **kwargs):
+    book = instance.book
+    if created:
+        book.status = Book.RESERVADO
+
+    book.save()

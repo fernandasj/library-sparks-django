@@ -1,23 +1,30 @@
 {% extends "base.html" %}
 
-{% load account %}
-
-{% block title %}Catalogo{% endblock %}
+{% block title %}Catálogo{% endblock %}
 
 {% block content %}
-{% for book in books %}
-
-<h2> Catalogo: </h2>
-<table border="2">
-    <tr>
-        <td>Titulo:</td>
-        <td>Status:</td>
-    </tr>
-    <tr>
-        <td> {{ book.title }} </td>
-        <td> {{ book.status }} </td>
-    </tr>
-
-</table>
-{% endfor %}
+<div class="table-reponsive">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>TÍTULO</th>
+        <th>EDITORA</th>
+        <th>EDIÇÃO</th>
+        <th>DATA DE EDIÇÃO</th>
+        <th>STATUS</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in books %}
+        <tr>
+          <td>{{ book.title }}</td>
+          <td>{{ book.edictor }}</td>
+          <td>{{ book.ediction }}</td>
+          <td>{{ book.date_ediction }}</td>
+          <td>{{ book.status }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}

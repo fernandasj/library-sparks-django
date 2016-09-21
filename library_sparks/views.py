@@ -8,7 +8,7 @@ from library_sparks.forms import ReserveForm
 
 @login_required
 def index(request):
-    return render(request, 'library_sparks/index.html')
+    return redirect('home')
 
 
 def catalogo(request):
@@ -21,9 +21,15 @@ def detail(request, pk):
     return render(request, 'library_sparks/detail.html', {'book': book})
 
 
-def historico(request):
-    user = request.user
-    return render(request, 'library_sparks/historico.html', {'user': user})
+@login_required
+def home(request):
+    lendings = request.user.lendings.all
+    reserves = request.user.reserves.all
+    return render(request, 'library_sparks/home.html', {
+        'lendings': lendings,
+        'reserves': reserves,
+        }
+    )
 
 
 def reserva(request):
@@ -33,12 +39,8 @@ def reserva(request):
         if form.is_valid():
             reserva = form.save(commit=False)
             reserva.user = request.user
-            book = reserva.book
-            book.status = Book.RESERVADO
-            book.save()
             reserva.save()
-            return redirect('historico')
-
+            return redirect('home')
         else:
             print form.errors
 
@@ -51,4 +53,4 @@ def cancelar_reserva(request, pk):
     book.status = Book.DISPONIVEL
     book.save()
     reserva.delete()
-    return redirect('historico')
+    return redirect('home')
