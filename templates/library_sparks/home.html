@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Início{% endblock %}
 
 {% block content %}
 
@@ -29,8 +29,10 @@
             {% endfor %}
           </tbody>
         </table>
-      {% endif %}
-    </div>
+      </div>
+    {% else %}
+      <h4>Você não possui empréstimos.</h4>
+    {% endif %}
   </div>
 </div>
 
@@ -54,13 +56,15 @@
               <tr>
                 <td>{{ reserve.book.title }}</td>
                 <td>{{ reserve.date_reserve }}</td>
-                <td><a class="btn btn-danger btn-sm" href="{% url 'reserva_cancelar' reserve.pk %}">Cancelar Reserva</a></td>
+                <td><a class="btn btn-danger btn-xs" href="{% url 'reserve_cancel' reserve.pk %}">Cancelar Reserva</a></td>
               </tr>
             {% endfor %}
           </tbody>
         </table>
-      {% endif %}
-    </div>
+      </div>
+    {% else %}
+      <h4>Você não possui reservas ativas no momento.</h4>
+    {% endif %}
   </div>
 </div>
 

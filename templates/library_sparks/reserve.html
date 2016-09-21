@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Reservar Livro{% endblock %}
+
+{% block content %}
+  {% if books %}
+    <div class="table-reponsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>TÍTULO</th>
+            <th>EDITORA</th>
+            <th>EDIÇÃO</th>
+            <th>DATA DE EDIÇÃO</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for book in books %}
+            <tr>
+              <td>{{ book.title }}</td>
+              <td>{{ book.edictor }}</td>
+              <td>{{ book.ediction }}</td>
+              <td>{{ book.date_ediction }}</td>
+              <td><a class="btn btn-danger btn-xs" href="{% url 'reserve_create' book.pk %}">Reservar Livro</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <h4>Não existem livros disponíveis para reserva.</h4>
+  {% endif %}
+{% endblock %}

@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import pre_delete, pre_save, post_save
 from django.dispatch import receiver
 
 
@@ -60,9 +60,9 @@ class Book(models.Model):
         verbose_name_plural = 'Livros'
 
 
-# ============================
+# ==============================
 # Lending
-# ============================
+# ==============================
 
 
 class Lending(models.Model):
@@ -98,29 +98,9 @@ class Lending(models.Model):
         verbose_name_plural = 'Emprestimos'
 
 
-@receiver(post_save, sender=Lending)
-def lending_book_status(sender, instance=None, created=False, **kwargs):
-    book = instance.book
-    if not instance.date_devolution:
-        book.status = Book.EMPRESTADO
-    else:
-        book.status = Book.DISPONIVEL
-    book.save()
-
-
-@receiver(post_save, sender=Lending)
-def remove_previous_reserve(sender, instance=None, created=False, **kwargs):
-    if created:
-        try:
-            reserve = Reserve.objects.get(book=instance.book)
-            reserve.delete()
-        except ObjectDoesNotExist:
-            pass
-
-
-# =========================
+# ==============================
 #  Reserve
-# =========================
+# ==============================
 
 
 class Reserve(models.Model):
@@ -147,6 +127,37 @@ class Reserve(models.Model):
     class Meta:
         verbose_name = 'Reserva'
         verbose_name_plural = 'Reservas'
+
+
+# ==============================
+# Signals
+# ==============================
+
+
+@receiver(pre_delete, sender=Reserve)
+def remove_reserve_status(sender, instance=None, **kwargs):
+    book = instance.book
+    book.status = Book.DISPONIVEL
+    book.save()
+
+
+@receiver(pre_save, sender=Lending)
+def remove_previous_reserve(sender, instance=None, **kwargs):
+    try:
+        reserve = Reserve.objects.get(book=instance.book)
+        reserve.delete()
+    except ObjectDoesNotExist:
+        pass
+
+
+@receiver(post_save, sender=Lending)
+def lending_book_status(sender, instance=None, created=False, **kwargs):
+    book = instance.book
+    if not instance.date_devolution:
+        book.status = Book.EMPRESTADO
+    else:
+        book.status = Book.DISPONIVEL
+    book.save()
 
 
 @receiver(post_save, sender=Reserve)

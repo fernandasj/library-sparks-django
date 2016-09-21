@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Catálogo{% endblock %}
+
+{% block content %}
+  {% if books %}
+    <div class="table-reponsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>TÍTULO</th>
+            <th>EDITORA</th>
+            <th>EDIÇÃO</th>
+            <th>DATA DE EDIÇÃO</th>
+            <th>STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for book in books %}
+            <tr>
+              <td>{{ book.title }}</td>
+              <td>{{ book.edictor }}</td>
+              <td>{{ book.ediction }}</td>
+              <td>{{ book.date_ediction }}</td>
+              <td>{{ book.status }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <h4>Não existem livros.</h4>
+  {% endif %}
+{% endblock %}

@@ -3,7 +3,7 @@
 {% block title %}Inscrever-se{% endblock %}
 
 {% block content %}
-  <form class="form-account" id="signup_form" method="post" action="{% url 'account_signup' %}">
+  <form class="form-library" id="signup_form" method="post" action="{% url 'account_signup' %}">
     {% csrf_token %}
 
     {% if form.errors %}
@@ -54,7 +54,7 @@
     {% endif %}
     <button class="btn btn-success btn-block" type="submit">INSCREVER-SE</button>
 
-    <div class="form-account-info">
+    <div class="form-library-info">
       <p>Já tem uma conta? <a href="{{ login_url }}">Entrar</a></p>
     </div>
   </form>

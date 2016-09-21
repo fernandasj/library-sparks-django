@@ -2,12 +2,12 @@
 
 from django.contrib import admin
 
-from .models import Book, Lending, Reserve
+from library_sparks.models import Book, Lending, Reserve
 
 
-# ====================
+# ==============================
 # BookAdmin
-# ====================
+# ==============================
 
 
 class BookAdmin(admin.ModelAdmin):
@@ -16,9 +16,9 @@ class BookAdmin(admin.ModelAdmin):
 admin.site.register(Book, BookAdmin)
 
 
-# ====================
+# ==============================
 # LendingAdmin
-# ====================
+# ==============================
 
 
 class LendingAdmin(admin.ModelAdmin):
@@ -28,9 +28,9 @@ class LendingAdmin(admin.ModelAdmin):
 admin.site.register(Lending, LendingAdmin)
 
 
-# ====================
+# ==============================
 # LendingAdmin
-# ====================
+# ==============================
 
 
 class ReserveAdmin(admin.ModelAdmin):

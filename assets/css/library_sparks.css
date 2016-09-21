@@ -1,5 +1,5 @@
 body {
-  padding-top: 7rem;
+  padding-top: 10rem;
 }
 
 .navbar .navbar-toggle {
@@ -13,7 +13,7 @@ body {
 }
 
 
-.form-account {
+.form-library {
   max-width: 50rem;
   padding: 1.5rem;
   margin-top: 3rem;
@@ -21,15 +21,15 @@ body {
   margin-right: auto;
 }
 
-.form-account .checkbox {
+.form-library .checkbox {
   margin-bottom: 1rem;
 }
 
-.form-account .checkbox {
+.form-library .checkbox {
   font-weight: normal;
 }
 
-.form-account .form-control {
+.form-library .form-control {
   position: relative;
   height: auto;
   -webkit-box-sizing: border-box;
@@ -39,29 +39,29 @@ body {
   font-size: 1.6rem;
 }
 
-.form-account .form-control:focus {
+.form-library .form-control:focus {
   z-index: 2;
 }
 
-.form-account input[type="text"] {
+.form-library input[type="text"] {
   margin-bottom: 1rem;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.form-account input[type="email"] {
+.form-library input[type="email"] {
   margin-bottom: 1rem;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.form-account input[type="password"] {
+.form-library input[type="password"] {
   margin-bottom: 1rem;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-.form-account .form-account-info {
+.form-library .form-library-info {
   padding: 1rem;
   margin: 1rem;
   text-align: center;
