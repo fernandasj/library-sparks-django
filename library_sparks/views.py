@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from django.db.models import Q
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -32,7 +34,11 @@ def books(request):
 
 @login_required
 def lending_books(request):
-    books = Book.objects.filter(status=Book.EMPRESTADO)
+    books_exclude = []
+    for b in request.user.lendings.all():
+        books_exclude.append(b.book.pk)
+    print books_exclude
+    books = Book.objects.filter(status=Book.EMPRESTADO).exclude(pk__in=books_exclude)
 
     return render(request, 'library_sparks/reserve.html', {
         'books': books
