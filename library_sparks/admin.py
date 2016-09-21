@@ -11,7 +11,7 @@ from library_sparks.models import Book, Lending, Reserve
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'edictor', 'ediction', 'date_ediction', 'status')
+    list_display = ('id', 'title', 'author', 'edictor', 'ediction', 'date_ediction', 'status')
     ordering = ('id',)
 
 admin.site.register(Book, BookAdmin)
