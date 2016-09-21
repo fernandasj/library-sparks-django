@@ -30,6 +30,12 @@ class Book(models.Model):
         max_length=150
     )
 
+    author = models.CharField(
+        'Autor',
+        default='Autor Desconhecido',
+        max_length=80
+    )
+
     ediction = models.CharField(
         'Local de Edição',
         max_length=65
