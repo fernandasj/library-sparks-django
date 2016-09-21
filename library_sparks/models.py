@@ -3,9 +3,8 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
-from django.db.models.signals import pre_delete, pre_save, post_save
+from django.db.models.signals import pre_delete, post_save
 from django.dispatch import receiver
 
 
@@ -137,17 +136,8 @@ class Reserve(models.Model):
 @receiver(pre_delete, sender=Reserve)
 def remove_reserve_status(sender, instance=None, **kwargs):
     book = instance.book
-    book.status = Book.DISPONIVEL
+    book.status = Book.EMPRESTADO
     book.save()
-
-
-@receiver(pre_save, sender=Lending)
-def remove_previous_reserve(sender, instance=None, **kwargs):
-    try:
-        reserve = Reserve.objects.get(book=instance.book)
-        reserve.delete()
-    except ObjectDoesNotExist:
-        pass
 
 
 @receiver(post_save, sender=Lending)
@@ -156,7 +146,13 @@ def lending_book_status(sender, instance=None, created=False, **kwargs):
     if not instance.date_devolution:
         book.status = Book.EMPRESTADO
     else:
-        book.status = Book.DISPONIVEL
+        if book.status == Book.RESERVADO:
+            reserve = Reserve.objects.get(book=instance.book)
+            lending = Lending(book=book, user=reserve.user)
+            reserve.delete()
+            lending.save()
+        else:
+            book.status = Book.DISPONIVEL
     book.save()
 
 
