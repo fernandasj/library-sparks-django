@@ -139,8 +139,5 @@ jspm_packages
 # >>> SQLite 3 <<<
 db.sqlite3
 
-# Generated Static Files
-static/
-
 # Generated Migrations
 migrations/

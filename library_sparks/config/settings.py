@@ -56,7 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = 'library_sparks.config.urls'
 
 TEMPLATES = [
     {
@@ -87,7 +87,7 @@ LOGIN_REDIRECT_URL = "/"
 
 SITE_ID = 1
 
-WSGI_APPLICATION = 'config.wsgi.application'
+WSGI_APPLICATION = 'library_sparks.config.wsgi.application'
 
 
 # Database
@@ -95,12 +95,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'library_sparks',
-        'USER': 'postgres',
-        'PASSWORD': '123456',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(os.path.dirname(BASE_DIR), 'db.sqlite3'),
     }
 }
 
